@@ -474,3 +474,35 @@ function FirstFactorial(num) {
      
   // keep this function call here 
   console.log(FirstFactorial(readline()));
+
+//   Longest Word
+// Have the function LongestWord(sen) take the sen parameter being passed and return the longest word in the string. If there are two or more words that are the same length, return the first word from the string with that length. Ignore punctuation and assume sen will not be empty. Words may also contain numbers, for example "Hello world123 567"
+// Examples
+// Input: "fun&!! time"
+// Output: time
+// Input: "I love dogs"
+// Output: love
+
+
+function LongestWord(sen) { 
+    let regX = /[A-Za-z]/g;
+    let words = sen.split(" ");
+    let maxLength = 0;
+    let longestWord;
+    
+    let cleanWords = words.map((word) => (word.match(regX)).join(""));
+  
+    for(let i=0 ; i< cleanWords.length ; i++){
+      if( cleanWords[i].length > maxLength){
+        maxLength = cleanWords[i].length;
+        longestWord = cleanWords[i];
+      }  
+  
+    }
+    return longestWord;
+  
+  
+  }
+     
+  // keep this function call here 
+  console.log(LongestWord(readline()));
