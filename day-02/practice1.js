@@ -372,3 +372,53 @@ function FindIntersection(strArr) {
      
   // keep this function call here 
   console.log(FindIntersection(readline()));
+
+
+//   Questions Marks
+// Have the function QuestionsMarks(str) take the str string parameter, which will contain single digit numbers, letters, and question marks, and check if there are exactly 3 question marks between every pair of two numbers that add up to 10. If so, then your program should return the string true, otherwise it should return the string false. If there aren't any two numbers that add up to 10 in the string, then your program should return false as well.
+
+// For example: if str is "arrb6???4xxbl5???eee5" then your program should return true because there are exactly 3 question marks between 6 and 4, and 3 question marks between 5 and 5 at the end of the string.
+// Examples
+// Input: "aa6?9"
+// Output: false
+// Input: "acc?7??sss?3rr1??????5"
+// Output: true
+
+function QuestionsMarks(str) { 
+    let numberArray = [];
+    let indexOfNumbersArray = [];
+    let numberOfQuestionMarks = 0;
+     
+    for(i=0; i< str.length ; i++){
+      if( /\d/.test(str.charAt(i)) === true){
+        numberArray.push(str[i])
+        indexOfNumbersArray.push(i)
+      }
+    
+    }
+    
+    for(j=0; j< numberArray.length ; j++) {
+      
+      if(parseInt(numberArray[j])+ parseInt(numberArray[j+1]) === 10)
+      {
+       
+        for(k=indexOfNumbersArray[j]; k=indexOfNumbersArray[j+1]; k++ ){
+            if(str.charAt(k) === '?'){
+              numberOfQuestionMarks += 1;
+            }
+            
+           if(numberOfQuestionMarks === 3){
+             return true;
+            }
+        }
+    
+      }
+      return false;
+    
+    }
+    
+    
+    }
+       
+    // keep this function call here 
+    console.log(QuestionsMarks(readline()));
