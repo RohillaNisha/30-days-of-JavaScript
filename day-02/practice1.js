@@ -292,3 +292,83 @@ var compose = function(functions) {
    
     
 };
+
+
+
+// Codeland Username Validation
+// Have the function CodelandUsernameValidation(str) take the str parameter being passed and determine if the string is a valid username according to the following rules:
+
+// 1. The username is between 4 and 25 characters.
+// 2. It must start with a letter.
+// 3. It can only contain letters, numbers, and the underscore character.
+// 4. It cannot end with an underscore character.
+
+// If the username is valid then your program should return the string true, otherwise return the string false.
+// Examples
+// Input: "aa_"
+// Output: false
+// Input: "u__hello_world123"
+// Output: true
+
+
+function CodelandUsernameValidation(str) { 
+
+    // code goes here  
+  if(str.length < 4 || str.length > 25){
+    return false;
+  }
+  
+  
+  if(str.charAt(str.length -1) === '_'){
+    return false;
+  }
+  
+  
+  if(! /^[A-Za-z]+$/.test(str.charAt(0)))
+    return false; 
+  
+  for(let i=0 ; i< str.length ; i++){
+    if ( /^[A-Za-z]+$/.test(str.charAt(i)) || /\d/.test(str.charAt(i)) || str.charAt(i) === '_'){
+      return true;
+    }
+    return false;
+  } 
+  return true;
+  }
+     
+  // keep this function call here 
+  console.log(CodelandUsernameValidation(readline()));
+
+
+//   Find Intersection
+// Have the function FindIntersection(strArr) read the array of strings stored in strArr which will contain 2 elements: the first element will represent a list of comma-separated numbers sorted in ascending order, the second element will represent a second list of comma-separated numbers (also sorted). Your goal is to return a comma-separated string containing the numbers that occur in elements of strArr in sorted order. If there is no intersection, return the string false.
+// Examples
+// Input: ["1, 3, 4, 7, 13", "1, 2, 4, 13, 15"]
+// Output: 1,4,13
+// Input: ["1, 3, 9, 10, 17, 18", "1, 4, 9, 10"]
+// Output: 1,9,10
+
+
+
+function FindIntersection(strArr) { 
+
+    let element1 = strArr[0].split(", ");
+    let element2 = strArr[1].split(", ");
+    let joinArray = [];
+  
+    for(let i=0 ; i< element1.length; i++){
+      if (element2.includes(element1[i])){
+        joinArray.push(element1[i]);
+  
+      }
+      
+    }
+  
+    let answer = joinArray.toString();
+    return answer; 
+    }
+    // code goes here  
+  
+     
+  // keep this function call here 
+  console.log(FindIntersection(readline()));
