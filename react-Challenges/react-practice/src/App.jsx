@@ -1,55 +1,27 @@
-import { useState , useEffect} from 'react'
+import ProgressBar from './components/progressBar';
+import Timer from './components/timer';
+import { useState } from 'react'
+import './styling/progressBar.css'
 
-import './App.css'
 
 function App() {
 
-const [min, setMin] = useState(0);
-const [sec, setSec] = useState(0);
-const [isRunning, setIsRunning] = useState(false);
-
-useEffect(() => {
-  if (!isRunning) return;
-
-  const interval =  setInterval( () => {
-    setSec((prevSec) => {
-      if (prevSec === 59) {
-        setMin((prevMin) => prevMin +1);
-        return 0;
-      }
-      return prevSec + 1;
-    });
-  }, 1000);
-
-  // cleanup function to clear the interval when the component unmounts or when the timer stops
-
-  return () => clearInterval(interval);
-
-}, [isRunning]); // depencemdy array is "isRunning" re runs when isRunning changes
-
-  const startTimer = () => {
-
-  setIsRunning(true);
-    };
-  const stopTimer = () => {
- setIsRunning(false)
-  };
-  const resetTimer = () => {
-    setIsRunning(false);
-    setSec(0);
-    setMin(0);
-  };
+  const [val, setVal] = useState(0);
+ 
   return (
-    <div className="container">
-      <h1>Timer</h1>
-      <span> {min} mins </span>
-      <span> {sec} secs</span>
-      <div>
-        <button onClick={startTimer}>Start</button>
-        <button onClick={stopTimer}>Stop</button>
-        <button onClick={resetTimer}>Reset</button>
-      </div>
-    </div>
+    <>
+      <div className="App">
+    <h1>Progress bar</h1>
+    <ProgressBar width={val} />
+    <form>
+      <label >Input Percentage:</label>
+      <input type="number" value= {val} onChange={ (e) => setVal(e.target.value)} />
+    </form>
+  </div>
+  <Timer/>
+
+    </>
+  
   );
  
 }
