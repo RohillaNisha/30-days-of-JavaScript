@@ -725,7 +725,7 @@ function memoize(fn) {
  
 
 // Example 1:
-
+-
 // Input: 
 // promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20)), 
 // promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
@@ -747,7 +747,7 @@ function memoize(fn) {
  * @param {Promise} promise2
  * @return {Promise}
  */
-var addTwoPromises = async function(promise1, promise2) {
+async function(promise1, promise2) {
   try{
       let val1 = await promise1;
       let val2 = await promise2
@@ -763,4 +763,46 @@ var addTwoPromises = async function(promise1, promise2) {
 /**
 * addTwoPromises(Promise.resolve(2), Promise.resolve(2))
 *   .then(console.log); // 4
+*/
+
+
+// Given a positive integer millis, write an asynchronous function that sleeps for millis milliseconds. It can resolve any value.
+
+ 
+
+// Example 1:
+
+// Input: millis = 100
+// Output: 100
+// Explanation: It should return a promise that resolves after 100ms.
+// let t = Date.now();
+// sleep(100).then(() => {
+//   console.log(Date.now() - t); // 100
+// });
+// Example 2:
+
+// Input: millis = 200
+// Output: 200
+// Explanation: It should return a promise that resolves after 200ms.
+ 
+
+
+
+/**
+ * @param {number} millis
+ * @return {Promise}
+ */
+async function sleep(millis) {
+
+  let mypromise = new Promise(function(resolve) {
+      setTimeout(function() {
+          resolve();
+      }, millis)
+  })
+  
+}
+
+/** 
+* let t = Date.now()
+* sleep(100).then(() => console.log(Date.now() - t)) // 100
 */
