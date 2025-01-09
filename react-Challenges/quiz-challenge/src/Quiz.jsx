@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const style = {
   container: {
@@ -41,18 +41,27 @@ function Quiz() {
     const [selectedOption, setSelectedOption] = useState("");
     const [feedback, setFeedback] = useState("");
 
+
     const handleSelectionChange = (e) =>{
 
     setSelectedOption( e.target.value);
 
     }
 
+    const handleQuestionChange = () => {
+        setFeedback("");
+        setCurrentQuestionIndex((prevQuestionIndex) => prevQuestionIndex+1);
+
+
+    }
+
+
     const handleNextQuestion = (e) => {
-
-
         
+
         if(currentQuestionIndex >= questions.length - 1){
             setAllAnswered(true);
+           
         }
 
         if(currentQuestion.correct === selectedOption){
@@ -63,11 +72,14 @@ function Quiz() {
             setFeedback("Wrong Answer");
         }
 
-        setCurrentQuestionIndex((prevQuestionIndex) => prevQuestionIndex+1);
+        setTimeout(handleQuestionChange, 1000);
+      
 
 
         
     }
+
+    
 
     const questions = [
         {
@@ -87,7 +99,7 @@ function Quiz() {
   return (
 
     <div style={style.container}>
-    {allAnswered ? 
+    {allAnswered && feedback === "" ? 
         <div  style={style.container}> 
         <h1>Quiz Over </h1>
             <h3>
@@ -96,10 +108,9 @@ function Quiz() {
           </div> : 
     <div style={style.container}>
       <div id="question" style={style.question}>
-      <h4> Previous Feedback: {feedback}</h4>
       <h1> Question No. {currentQuestionIndex + 1} : </h1>
         {currentQuestion.question}
-        {currentQuestion.options.map((option, index) => (
+        {currentQuestion?.options.map((option, index) => (
             <div key={index} style={style.options}>
             <label>
             <input
@@ -121,6 +132,7 @@ function Quiz() {
         Submit
       </button>
       <div id="feedback" style={style.feedback}>
+          <h4> Feedback: {feedback}</h4>
       </div>
       </div>
     }
